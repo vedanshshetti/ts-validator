@@ -192,6 +192,39 @@ console.log(result.errMessage);
 // Output includes path: "user.profile" with type mismatch details
 ```
 
+## Error Locale
+
+Customize error messages by specifying a language locale. Supported locales: `english` (default) and `german`.
+
+```typescript
+// English error messages (default)
+const schemaEn = defineSchema("age", "number", "english");
+const resultEn = schemaEn.validate("thirty");
+console.log(resultEn.errMessage);
+// Output: "[@typescript-utils/schema-validator]: ERROR, Schema does not match the passed value (schema:number vs value:string) on schema \"age\" failed."
+
+// German error messages
+const schemaDe = defineSchema("alter", "number", "german");
+const resultDe = schemaDe.validate("dreissig");
+console.log(resultDe.errMessage);
+// Output: "[@typescript-utils/schema-validator]: ERROR, Schema stimmt nicht mit dem übergebnen Wert überein (schema:number vs value:string) on schema \"alter\" failed."
+```
+
+The locale option is also applied to nested schemas:
+
+```typescript
+const userSchemaDe = defineSchema("user", {
+  profile: {
+    age: "number"
+  }
+}, "german");
+
+const result = userSchemaDe.validate({
+  profile: { age: "thirty" }
+});
+// Error message will be in German
+```
+
 ## Schema Definition Properties
 
 The `defineSchema` function returns an object with the following properties:
@@ -323,13 +356,14 @@ const standardUserSchema = defineSchema("user", {
 
 ## API Reference
 
-### `defineSchema(name, schema)`
+### `defineSchema(name, schema, errMessageLanguage)`
 
 Creates a new schema validator.
 
 **Parameters:**
 - `name` (string): A unique name for the schema (used in error messages)
 - `schema` (SchemaInterface): The schema definition
+- `errMessageLanguage` (optional): `"english" | "german" | undefined` - Language for error messages. Defaults to `"english"`
 
 **Returns:** An object with:
 - `$name`: The schema name
