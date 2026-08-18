@@ -15,4 +15,3 @@ console.log(UserSch.validate({
     "name": "Vedansh",
     "age": "12"
 }));
-//# sourceMappingURL=index.js.map
