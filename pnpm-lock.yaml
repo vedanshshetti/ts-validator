@@ -11,9 +11,6 @@ importers:
       '@typescript-utils/helpertypes':
         specifier: 1.0.0
         version: 1.0.0
-      '@typescript-utils/schema-validator':
-        specifier: ^1.2.1
-        version: 1.2.1
     devDependencies:
       typescript:
         specifier: 7.0.2
@@ -23,9 +20,6 @@ packages:
 
   '@typescript-utils/helpertypes@1.0.0':
     resolution: {integrity: sha512-mCGMzxPuVsaHZGpefUfOeJS8xLdFDH8fvoJqa9VmtZxwsaAiYTOAsO033BTqb+Kb1NabeS9ycK8I/ex+oHXlEA==}
-
-  '@typescript-utils/schema-validator@1.2.1':
-    resolution: {integrity: sha512-dDFMgMgEYr75kI+HthnxxVmlhhjePoXqb/ih0j3JGzz4RJtvp0cQqgt62hy1sweOvLVxIgXoT/a89iAO1ykaug==}
 
   '@typescript/typescript-aix-ppc64@7.0.2':
     resolution: {integrity: sha512-MTKKkWB7p/0E9xi1d1tHtZ5PiLkGEMIq88pK2CubZjOsLtYTLqhgIgi6zepFa+9GHZ6h05NMCkQxGKiPXMxXtQ==}
@@ -155,10 +149,6 @@ packages:
 snapshots:
 
   '@typescript-utils/helpertypes@1.0.0': {}
-
-  '@typescript-utils/schema-validator@1.2.1':
-    dependencies:
-      '@typescript-utils/helpertypes': 1.0.0
 
   '@typescript/typescript-aix-ppc64@7.0.2':
     optional: true

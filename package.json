@@ -1,6 +1,6 @@
 {
   "name": "@typescript-utils/schema-validator",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "A lightweight TypeScript schema validation library for runtime type checking. Validate JSON data and primitive values against defined schemas with clear error messages.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,12 +9,11 @@
     "typescript": "7.0.2"
   },
   "dependencies": {
-    "@typescript-utils/helpertypes": "1.0.0",
-    "@typescript-utils/schema-validator": "^1.2.1"
+    "@typescript-utils/helpertypes": "1.0.0"
   },
   "scripts": {
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepublishOnly": "pnpm install & tsc"
   },
   "repository": {
     "type": "git",
