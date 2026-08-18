@@ -1,44 +1,59 @@
 import type { JSON as JsonV, Primitive, Union } from "@typescript-utils/helpertypes";
-import type { RawPrimitives, SchemaInterface, TypeofOptions } from "../types";
+import type { RawPrimitives, SchemaInterface, TypeofOptions } from "../types/index";
+import { validator_error_messages_english } from "../locales/validator/en";
+import { validator_error_messages_german } from "../locales/validator/de";
 
 export interface ValidatorReturnObject  {
     valid: boolean;
     errMessage?: string | undefined;
 }
 
+function resolveType(value: any): TypeofOptions {
+  if (Array.isArray(value)) return "array";
+  if (value === null) return "undefined"; // or "null" if you want to support it
+  return typeof value as TypeofOptions;
+}
+
+
 
 export const createValidator = 
   ( 
-    name: string,
     schemaType: TypeofOptions,
-    schema: SchemaInterface
+    schema: SchemaInterface,
+    options: {
+      name: string,
+      language?: "english" | "german" | undefined
+    }
   )=> function validate(value: JsonV | Array<Union<JsonV, Primitive>>): ValidatorReturnObject {
     let error: ValidatorReturnObject;
+    let name = options.name;
+    let vem = options.language === "english" ? validator_error_messages_english : options.language==="german" ? validator_error_messages_german : validator_error_messages_english;;
+    let tv: TypeofOptions = resolveType(value);
     switch (schemaType) {
       case "string":  error = {
-          valid: typeof value === "string",
-          errMessage: typeof value === "string" ? undefined : `Schema does not match the passed value (schema:string vs value:${typeof value})`
+          valid: tv === "string",
+          errMessage: tv === "string" ? undefined : vem.invalid_type("string", tv)
       }; break;
       case "number": error = {
-        valid: typeof value === "number",
-        errMessage: typeof value === "number" ? undefined : `Schema does not match the passed value (schema:number vs value:${typeof value})`
+        valid: tv === "number",
+        errMessage: tv === "number" ? undefined : vem.invalid_type("number", tv)
       }; break;
       case "boolean": error = {
-        valid: typeof value === "boolean",
-        errMessage: typeof value === "boolean" ? undefined : `Schema does not match the passed value (schema:boolean vs value:${typeof value})`
+        valid: tv === "boolean",
+        errMessage: tv === "boolean" ? undefined : vem.invalid_type("boolean", tv)
       }; break;
       case "symbol": error = {
-        valid: typeof value === "symbol",
-        errMessage: typeof value === "symbol" ? undefined : `Schema does not match the passed value (schema:symbol vs value:${typeof value})`
+        valid: tv === "symbol",
+        errMessage: tv === "symbol" ? undefined : vem.invalid_type("symbol", tv)
       }; break;
       case "bigint": error = {
-        valid: typeof value === "bigint",
-        errMessage: typeof value === "bigint" ? undefined : `Schema does not match the passed value (schema:bigint vs value:${typeof value})`
+        valid: tv === "bigint",
+        errMessage: tv === "bigint" ? undefined : vem.invalid_type("bigint", tv)
       };
       break;
       case "undefined": error = {
-        valid: typeof value === "undefined",
-        errMessage: typeof value === "undefined" ? undefined : `Schema does not match the passed value (schema:undefined vs value:${typeof value})`
+        valid: tv === "undefined",
+        errMessage: tv === "undefined" ? undefined : vem.invalid_type("undefined", tv)
       };
       break;
 
@@ -46,24 +61,24 @@ export const createValidator =
         const temp = Array.isArray(value) ? value.every(v => validate(v).valid) : false;
         error = {
             valid: temp,
-            errMessage: temp ? undefined : `Schema does not match the passed value (schema:array vs value:${typeof value})`
+            errMessage: temp ? undefined : vem.invalid_array(tv)
         };
         break;
 
       case "function":
         error = {
-          valid: typeof value === "function",
-          errMessage: typeof value === "function"
+          valid: tv === "function",
+          errMessage: tv === "function"
             ? undefined
-            : `Schema does not match the passed value (schema:function vs value:${typeof value})`
+            : vem.invalid_type("function", tv)
         };
         break;
 
       case "object":
-         if (typeof value !== "object" || value === null || Array.isArray(value)) {
+         if (tv !== "object" || value === null || Array.isArray(value)) {
            error = {
              valid: false,
-             errMessage: `Schema does not match the passed value (schema:object vs value:${typeof value})`
+             errMessage: vem.invalid_object(tv)
            };
            break;
          }
@@ -81,9 +96,12 @@ export const createValidator =
               ? "array"
               : "object";
         const childValidator = createValidator(
-          `${name}.${key}`,
-          childType as any,
-          childSchema as any
+          childType as TypeofOptions,
+          childSchema as SchemaInterface,
+          {
+            language: options.language ?? undefined,
+            name: `${name}.${key}`
+          }
         );
                    const result = childValidator((value as any)[key]);
 
@@ -101,7 +119,7 @@ export const createValidator =
          break;
 
 
-      default: error = {valid: false, errMessage: `Schema Validation failed`};
+      default: error = {valid: false, errMessage: vem.validation_failure()};
     }   
 
     return {
