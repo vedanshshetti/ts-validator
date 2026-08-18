@@ -1,0 +1,1 @@
+{"version":3,"file":"defineSchema.js","sourceRoot":"","sources":["../../package/src/core/defineSchema.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,eAAe,EAA8B,MAAM,mBAAmB,CAAC;AAiBhF,MAAM,UAAU,YAAY,CAAC,IAAY,EAAE,MAAuB;IAC9D,OAAO;QACH,KAAK,EAAE,IAAI;QACX,KAAK,EAAE,OAAO,MAAM;QACpB,OAAO,EAAE,MAAM;QACf,QAAQ,EAAE,eAAe,CAAC,IAAI,EAAE,OAAO,MAAM,EAAE,MAAM,CAAC;KAChD,CAAC;AACf,CAAC"}
