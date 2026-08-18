@@ -1,0 +1,29 @@
+{
+	"name": "@typescript-utils/schema-validator",
+	"version": "1.0.0",
+	"description": "",
+	"main": "dist/index.js",
+	"readme": "README.md",
+	"devDependencies": {
+		"typescript": "7.0.2"
+	},
+	"dependencies": {
+		"@typescript-utils/helpertypes": "1.0.0"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "tsc"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/vedanshshetti/ts-validator.git"
+	},
+	"keywords": [],
+	"author": "Vedansh Shetti <vedansh.shetti@gmail.com>",
+	"license": "Apache-2.0",
+	"type": "module",
+	"bugs": {
+		"url": "https://github.com/vedanshshetti/ts-validator/issues"
+	},
+	"homepage": "https://github.com/vedanshshetti/ts-validator#readme"
+}
