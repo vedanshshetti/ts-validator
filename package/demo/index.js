@@ -1,4 +1,7 @@
-import { tsv } from "../src/";
+// Quick Note: You can run this demo script using "tsx", just run "npm i -g tsx", then "tsx package/demo/index.js"
+
+import { tsv } from "@typescript-utils/schema-validator";
+
 const UserSch = tsv.defineSchema("User", {
     name: "string",
     age: "number"

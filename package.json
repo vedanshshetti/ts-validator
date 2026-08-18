@@ -9,7 +9,8 @@
     "typescript": "7.0.2"
   },
   "dependencies": {
-    "@typescript-utils/helpertypes": "1.0.0"
+    "@typescript-utils/helpertypes": "1.0.0",
+    "@typescript-utils/schema-validator": "^1.1.1"
   },
   "scripts": {
     "build": "tsc",
