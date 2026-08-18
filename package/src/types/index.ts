@@ -14,3 +14,5 @@ export type TypeofOptions =
     | "array" 
     | "undefined" 
     | "function";
+
+export type InferSchemaType<T extends SchemaInterface> = T;
