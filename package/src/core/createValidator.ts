@@ -7,9 +7,12 @@ export interface ValidatorReturnObject  {
 }
 
 
-export const createValidator = (name: string,
+export const createValidator = 
+  ( 
+    name: string,
     schemaType: TypeofOptions,
-    schema: SchemaInterface)=> function validate(value: JsonV | Array<Union<JsonV, Primitive>>): ValidatorReturnObject {
+    schema: SchemaInterface
+  )=> function validate(value: JsonV | Array<Union<JsonV, Primitive>>): ValidatorReturnObject {
     let error: ValidatorReturnObject;
     switch (schemaType) {
       case "string":  error = {
@@ -83,9 +86,11 @@ export const createValidator = (name: string,
           childSchema as any
         );
                    const result = childValidator((value as any)[key]);
+
                    if (!result.valid) {
              allValid = false;
-             firstError = result.errMessage;
+             // Extract the error message without the duplicate prefix and "ERROR, "
+             firstError = result.errMessage?.replace(/^\[@typescript-utils\/ts-validator\]: ERROR, /, '');
              break;
            }
          }

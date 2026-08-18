@@ -4,10 +4,10 @@ import { createValidator, type ValidatorReturnObject } from "./createValidator";
 
 
     /**
-     * 
+     * Creates a new schema
      * @param {string} name 
      * @param {SchemaInterface} schema 
-     * @returns 
+     * @returns {SchemaDefinerReturnValue}
      */
 
 interface SchemaDefinerReturnValue {
@@ -17,7 +17,7 @@ interface SchemaDefinerReturnValue {
         validate: (value: JsonV | Array<Union<JsonV, Primitive>>) => ValidatorReturnObject;
     } 
 
-export function defineSchema(name: string, schema: SchemaInterface) {
+export function defineSchema(name: string, schema: SchemaInterface): SchemaDefinerReturnValue {
     return {
         $name: name,
         $type: typeof schema,
