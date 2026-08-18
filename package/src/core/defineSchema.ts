@@ -3,19 +3,19 @@ import type { SchemaInterface, TypeofOptions } from "../types";
 import { createValidator, type ValidatorReturnObject } from "./createValidator";
 
 
-    /**
-     * Creates a new schema
-     * @param {string} name 
-     * @param {SchemaInterface} schema 
-     * @returns {SchemaDefinerReturnValue}
-     */
-
 interface SchemaDefinerReturnValue {
-        $name: string,
-        $type: TypeofOptions,
-        $schema: SchemaInterface,
-        validate: (value: JsonV | Array<Union<JsonV, Primitive>>) => ValidatorReturnObject;
-    } 
+    $name: string,
+    $type: TypeofOptions,
+    $schema: SchemaInterface,
+    validate: (value: JsonV | Array<Union<JsonV, Primitive>>) => ValidatorReturnObject;
+} 
+
+/**
+ * Creates a new schema
+ * @param {string} name 
+ * @param {SchemaInterface} schema 
+ * @returns {SchemaDefinerReturnValue}
+ */
 
 export function defineSchema(name: string, schema: SchemaInterface): SchemaDefinerReturnValue {
     return {

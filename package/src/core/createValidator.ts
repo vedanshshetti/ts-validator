@@ -90,7 +90,7 @@ export const createValidator =
                    if (!result.valid) {
              allValid = false;
              // Extract the error message without the duplicate prefix and "ERROR, "
-             firstError = result.errMessage?.replace(/^\[@typescript-utils\/ts-validator\]: ERROR, /, '');
+             firstError = result.errMessage?.replace(/^\[@typescript-utils\/schema-validator\]: ERROR, /, '');
              break;
            }
          }
@@ -106,6 +106,6 @@ export const createValidator =
 
     return {
         valid: error.valid,
-        errMessage: error.valid ? undefined : `[@typescript-utils/ts-validator]: ERROR, ${error.errMessage} on schema "${name}" failed.`
+        errMessage: error.valid ? undefined : `[@typescript-utils/schema-validator]: ERROR, ${error.errMessage} on schema "${name}" failed.`
     };
 }
