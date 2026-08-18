@@ -19,7 +19,12 @@
     "type": "git",
     "url": "git+https://github.com/vedanshshetti/ts-validator.git"
   },
-  "keywords": ["schema validator", "typescript", "validator", "schema"],
+  "keywords": [
+    "schema validator",
+    "typescript",
+    "validator",
+    "schema"
+  ],
   "author": "Vedansh Shetti <vedansh.shetti@gmail.com>",
   "license": "Apache-2.0",
   "type": "module",
